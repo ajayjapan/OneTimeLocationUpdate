@@ -71,7 +71,7 @@
 - (void)startTimer {
 
 	
-	timer = [NSTimer scheduledTimerWithTimeInterval:MAX_TIME_FOR_BEST_LOCATION 
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:MAX_TIME_FOR_BEST_LOCATION 
 									 target:self 
 								   selector:@selector(pushBest) 
 								   userInfo:nil 
@@ -98,8 +98,9 @@
 }
 
 - (void)dealloc {
-    [super dealloc];
-	locationManager.delegate = nil;
+  [super dealloc];
+	
+  locationManager.delegate = nil;
 	[locationManager release];
 	locationManager = nil;
 }

@@ -35,6 +35,8 @@
 		5B2B84B712A82D5E0039402A /* GetLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetLocation.h; sourceTree = "<group>"; };
 		5B2B84B812A82D5E0039402A /* GetLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetLocation.m; sourceTree = "<group>"; };
 		5B2B84BD12A832250039402A /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		5B2FE8FE12A99D2D00BF8D0E /* unit_testing.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = unit_testing.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5B2FE8FF12A99D2D00BF8D0E /* unit_testing-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "unit_testing-Info.plist"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* OneTimeLocationUpdate-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "OneTimeLocationUpdate-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -47,6 +49,13 @@
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765A50DF7441C002DB57D /* CoreGraphics.framework in Frameworks */,
 				5B2B84BE12A832250039402A /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B2FE8FB12A99D2D00BF8D0E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +79,7 @@
 			isa = PBXGroup;
 			children = (
 				1D6058910D05DD3D006BFB54 /* OneTimeLocationUpdate.app */,
+				5B2FE8FE12A99D2D00BF8D0E /* unit_testing.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -82,6 +92,7 @@
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				19C28FACFE9D520D11CA2CBB /* Products */,
+				5B2FE8FF12A99D2D00BF8D0E /* unit_testing-Info.plist */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -136,6 +147,24 @@
 			productReference = 1D6058910D05DD3D006BFB54 /* OneTimeLocationUpdate.app */;
 			productType = "com.apple.product-type.application";
 		};
+		5B2FE8FD12A99D2D00BF8D0E /* unit_testing */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5B2FE90212A99D2E00BF8D0E /* Build configuration list for PBXNativeTarget "unit_testing" */;
+			buildPhases = (
+				5B2FE8F912A99D2D00BF8D0E /* Resources */,
+				5B2FE8FA12A99D2D00BF8D0E /* Sources */,
+				5B2FE8FB12A99D2D00BF8D0E /* Frameworks */,
+				5B2FE8FC12A99D2D00BF8D0E /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = unit_testing;
+			productName = unit_testing;
+			productReference = 5B2FE8FE12A99D2D00BF8D0E /* unit_testing.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -156,6 +185,7 @@
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* OneTimeLocationUpdate */,
+				5B2FE8FD12A99D2D00BF8D0E /* unit_testing */,
 			);
 		};
 /* End PBXProject section */
@@ -170,7 +200,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		5B2FE8F912A99D2D00BF8D0E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5B2FE8FC12A99D2D00BF8D0E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		1D60588E0D05DD3D006BFB54 /* Sources */ = {
@@ -181,6 +234,13 @@
 				1D3623260D0F684500981E51 /* OneTimeLocationUpdateAppDelegate.m in Sources */,
 				28D7ACF80DDB3853001CB0EB /* OneTimeLocationUpdateViewController.m in Sources */,
 				5B2B84B912A82D5E0039402A /* GetLocation.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5B2FE8FA12A99D2D00BF8D0E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,6 +271,66 @@
 				INFOPLIST_FILE = "OneTimeLocationUpdate-Info.plist";
 				PRODUCT_NAME = OneTimeLocationUpdate;
 				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		5B2FE90012A99D2D00BF8D0E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "unit_testing-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = unit_testing;
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		5B2FE90112A99D2D00BF8D0E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				INFOPLIST_FILE = "unit_testing-Info.plist";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					SenTestingKit,
+					"-framework",
+					UIKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = unit_testing;
+				SDKROOT = iphoneos;
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
 			};
 			name = Release;
 		};
@@ -249,6 +369,15 @@
 			buildConfigurations = (
 				1D6058940D05DD3E006BFB54 /* Debug */,
 				1D6058950D05DD3E006BFB54 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		5B2FE90212A99D2E00BF8D0E /* Build configuration list for PBXNativeTarget "unit_testing" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5B2FE90012A99D2D00BF8D0E /* Debug */,
+				5B2FE90112A99D2D00BF8D0E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
