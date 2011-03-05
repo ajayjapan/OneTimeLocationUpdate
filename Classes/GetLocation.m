@@ -15,21 +15,34 @@
 
 @synthesize locationManager, delegate, timer, gotLocation;
 
+- (id)init{ 
+  if (self = [super init]){
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy= kCLLocationAccuracyBest;
+  }
+  return self;
+}
+
 
 -(void)pushBest
 {
-	if(!gotLocation) {
-
-		NSLog(@"stopUpdatingLocation");
-		[locationManager stopUpdatingLocation];
-				
-		NSLog(@"gotLocation");
-		[self.delegate gotLocation:locationManager.location];
-				
-		NSLog(@"invalidate timer");
-		[timer invalidate];
-		timer = nil;
-	}
+  if (self.locationManager.location) {
+    if(!gotLocation) {
+      
+      gotLocation = YES;
+      
+      NSLog(@"stopUpdatingLocation");
+      [self.locationManager stopUpdatingLocation];
+      
+      NSLog(@"gotLocation");
+      [self.delegate gotLocation:self.locationManager.location];
+      
+      NSLog(@"invalidate timer");
+      [timer invalidate];
+      self.timer = nil;
+    }
+  }
 	
 }
 
@@ -39,70 +52,68 @@
 	if(!gotLocation) {
 		NSLog(@"%f", newLocation.horizontalAccuracy);
 		if (newLocation.horizontalAccuracy <  DESIRED_ACCURACY) {
-			if ((locationManager.location.coordinate.longitude !=  0)&&(locationManager.location.coordinate.latitude !=  0)) {
+			if ((self.locationManager.location.coordinate.longitude !=  0)&&(self.locationManager.location.coordinate.latitude !=  0)) {
 				
 				gotLocation = YES;
 				
 				NSLog(@"gotLocation");
 				[self.delegate gotLocation:newLocation];
 				
-				NSLog(@"invalidate timer");
-				[timer invalidate];
-				timer = nil;
+        NSLog(@"invalidate timer");
+        [timer invalidate];
+        self.timer = nil;
 				
 				NSLog(@"stopUpdatingLocation");
-				[locationManager stopUpdatingLocation];
+				[self.locationManager stopUpdatingLocation];
 			}
 		}
 	}
 }
 
-- (void)locationManager:(CLLocationManager *)manager
-	   didFailWithError:(NSError *)error {
-	NSLog(@"The ERROR WAS: %i",[error code]);
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
 	
-	UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"We Couldn't get your Current Location. Try Again A Bit Later." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+  
+  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"There was an error in determining you location. We need your location to proceed. Try refreshing." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
 	[alert show];
 	[alert release];
-	
+  
+  [self.delegate gotLocation:nil];
+  
 }
 
 
 - (void)startTimer {
-
+  
 	
 	self.timer = [NSTimer scheduledTimerWithTimeInterval:MAX_TIME_FOR_BEST_LOCATION 
-									 target:self 
-								   selector:@selector(pushBest) 
-								   userInfo:nil 
-									repeats:NO];
+                                                target:self 
+                                              selector:@selector(pushBest) 
+                                              userInfo:nil 
+                                               repeats:NO];
 	
 }
 
 
 - (void)getCurrentLocation
 {
-
-	locationManager = [[CLLocationManager alloc] init];
-	locationManager.delegate = self;
-	locationManager.desiredAccuracy= kCLLocationAccuracyBest;
-			
-	[locationManager startUpdatingLocation];
+  
+	[self.locationManager startUpdatingLocation];
 	
 	[self startTimer];
 	
 	gotLocation = NO;
 	
 	NSLog(@"searching for location..");
-
+  
 }
 
 - (void)dealloc {
-  [super dealloc];
+  
+  self.timer = nil;
+  self.locationManager.delegate = nil;
+	self.locationManager = nil;
 	
-  locationManager.delegate = nil;
-	[locationManager release];
-	locationManager = nil;
+	[super dealloc];
 }
 
 @end
