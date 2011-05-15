@@ -17,7 +17,7 @@
 
 - (id)init{ 
   if (self = [super init]){
-    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy= kCLLocationAccuracyBest;
   }
@@ -109,11 +109,11 @@
 
 - (void)dealloc {
   
-  self.timer = nil;
-  self.locationManager.delegate = nil;
-	self.locationManager = nil;
-	
-	[super dealloc];
+    self.timer = nil;
+    self.locationManager.delegate = nil;
+    self.locationManager = nil;
+
+    [super dealloc];
 }
 
 @end
