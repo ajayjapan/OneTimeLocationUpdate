@@ -17,7 +17,7 @@
 
 - (id)init{ 
   if (self = [super init]){
-    self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+    self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy= kCLLocationAccuracyBest;
   }
@@ -71,11 +71,9 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-	
   
   UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"There was an error in determining you location. We need your location to proceed. Try refreshing." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
 	[alert show];
-	[alert release];
   
   [self.delegate gotLocation:nil];
   
@@ -113,7 +111,6 @@
     self.locationManager.delegate = nil;
     self.locationManager = nil;
 
-    [super dealloc];
 }
 
 @end

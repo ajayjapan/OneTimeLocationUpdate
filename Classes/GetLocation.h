@@ -17,19 +17,11 @@
 @end
 
 //You are conforming to the CoreLocation Manager protocol
-@interface GetLocation : NSObject <CLLocationManagerDelegate> {
-
-	CLLocationManager *locationManager;
-	id delegate;
-	NSTimer *timer;
-	BOOL gotLocation;
-	
-}
-
+@interface GetLocation : NSObject <CLLocationManagerDelegate>
 
 @property (nonatomic, assign) id  delegate;
-@property (nonatomic, retain) CLLocationManager *locationManager;
-@property (nonatomic, retain) NSTimer *timer;
+@property (nonatomic, strong) CLLocationManager *locationManager;
+@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL gotLocation;
 
 //Accessible Functions
