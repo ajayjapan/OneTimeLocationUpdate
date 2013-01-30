@@ -23,6 +23,7 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL gotLocation;
+@property (nonatomic, assign) NSTimeInterval waitTime;
 
 //Accessible Functions
 - (void)getCurrentLocation;

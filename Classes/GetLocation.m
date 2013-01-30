@@ -13,13 +13,14 @@
 
 @implementation GetLocation
 
-@synthesize locationManager, delegate, timer, gotLocation;
+@synthesize locationManager, delegate, timer, gotLocation, waitTime;
 
 - (id)init{ 
   if (self = [super init]){
     self.locationManager = [[CLLocationManager alloc] init];
     self.locationManager.delegate = self;
     self.locationManager.desiredAccuracy= kCLLocationAccuracyBest;
+    self.waitTime = MAX_TIME_FOR_BEST_LOCATION;
   }
   return self;
 }
@@ -83,7 +84,7 @@
 - (void)startTimer {
   
 	
-	self.timer = [NSTimer scheduledTimerWithTimeInterval:MAX_TIME_FOR_BEST_LOCATION 
+	self.timer = [NSTimer scheduledTimerWithTimeInterval:self.waitTime
                                                 target:self 
                                               selector:@selector(pushBest) 
                                               userInfo:nil 
