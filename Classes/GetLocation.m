@@ -53,19 +53,20 @@
 	if(!gotLocation) {
 		NSLog(@"%f", newLocation.horizontalAccuracy);
 		if (newLocation.horizontalAccuracy <  DESIRED_ACCURACY) {
-			if ((self.locationManager.location.coordinate.longitude !=  0)&&(self.locationManager.location.coordinate.latitude !=  0)) {
-				
-				gotLocation = YES;
-				
-				NSLog(@"gotLocation");
-				[self.delegate gotLocation:newLocation];
-				
-        NSLog(@"invalidate timer");
-        [timer invalidate];
-        self.timer = nil;
-				
-				NSLog(@"stopUpdatingLocation");
-				[self.locationManager stopUpdatingLocation];
+			if ((newLocation.coordinate.longitude !=  0)&&(newLocation.coordinate.latitude !=  0)) {
+                if ((newLocation.coordinate.longitude !=  oldLocation.coordinate.longitude)&&(newLocation.coordinate.latitude !=  oldLocation.coordinate.latitude)) {
+                    gotLocation = YES;
+                    
+                    NSLog(@"gotLocation");
+                    [self.delegate gotLocation:newLocation];
+                    
+                    NSLog(@"invalidate timer");
+                    [timer invalidate];
+                    self.timer = nil;
+                    
+                    NSLog(@"stopUpdatingLocation");
+                    [self.locationManager stopUpdatingLocation];
+                }
 			}
 		}
 	}
@@ -108,9 +109,9 @@
 
 - (void)dealloc {
   
-    self.timer = nil;
     self.locationManager.delegate = nil;
     self.locationManager = nil;
+    self.timer = nil;
 
 }
 
