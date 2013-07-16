@@ -11,9 +11,12 @@
 #define MAX_TIME_FOR_BEST_LOCATION 5 //SECONDS
 #define DESIRED_ACCURACY 100 //METERS
 
+NSString * const ACGetLocationSuccessNotification = @"com.ajay.get.location.success";
+NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.failure";
+
 @implementation GetLocation
 
-@synthesize locationManager, delegate, timer, gotLocation, waitTime;
+@synthesize locationManager, timer, gotLocation, waitTime;
 
 - (id)init{ 
   if (self = [super init]){
@@ -28,23 +31,24 @@
 
 -(void)pushBest
 {
-  if (self.locationManager.location) {
-    if(!gotLocation) {
-      
-      gotLocation = YES;
-      
-      NSLog(@"stopUpdatingLocation");
-      [self.locationManager stopUpdatingLocation];
-      
-      NSLog(@"gotLocation");
-      [self.delegate gotLocation:self.locationManager.location];
-      
-      NSLog(@"invalidate timer");
-      [timer invalidate];
-      self.timer = nil;
-    }
-  }
-	
+    CLLocation *location = self.locationManager.location;
+    if (location) {
+        if(!gotLocation) {
+            
+            gotLocation = YES;
+            
+            NSLog(@"stopUpdatingLocation");
+            [self.locationManager stopUpdatingLocation];
+            
+            NSLog(@"gotLocation");
+            [[NSNotificationCenter defaultCenter] postNotificationName:ACGetLocationSuccessNotification
+                                                                object:location];
+            
+            NSLog(@"invalidate timer");
+            [timer invalidate];
+            self.timer = nil;
+        }
+    }	
 }
 
 
@@ -58,8 +62,9 @@
                     gotLocation = YES;
                     
                     NSLog(@"gotLocation");
-                    [self.delegate gotLocation:newLocation];
-                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:ACGetLocationSuccessNotification
+                                                                        object:newLocation];
+
                     NSLog(@"invalidate timer");
                     [timer invalidate];
                     self.timer = nil;
@@ -73,12 +78,27 @@
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-  
-  UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"There was an error in determining you location. We need your location to proceed. Try refreshing." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-	[alert show];
-  
-  [self.delegate gotLocation:nil];
-  
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:ACGetLocationFailureNotification
+                                                        object:error];
+
+//    UIAlertView *alert = nil;
+//    
+//    if (error.code ==  kCLErrorDenied) {
+//        
+//        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
+//        
+//        NSString *errorMessage = [NSString stringWithFormat:@"We need access your location. Please go to Settings > Location Services and turn location services on for %@. Thanks.", appName];
+//        
+//        alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:errorMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//        
+//    } else {
+//        alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"There was an error in determining you location. We need your location to proceed. Try refreshing." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
+//    }
+//    
+//    [alert show];
+//    
+
 }
 
 
