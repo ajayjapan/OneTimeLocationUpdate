@@ -18,6 +18,16 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
 
 @synthesize locationManager, timer, gotLocation, waitTime;
 
++ (GetLocation *)sharedInstance {
+    static GetLocation *_sharedInstance = nil;
+    static dispatch_once_t oncePredicate;
+    dispatch_once(&oncePredicate, ^{
+        _sharedInstance = [[self alloc] init];
+    });
+    
+    return _sharedInstance;
+}
+
 - (id)init{ 
   if (self = [super init]){
     self.locationManager = [[CLLocationManager alloc] init];

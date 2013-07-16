@@ -10,13 +10,6 @@
 //You must import the CoreLocation Framework
 #import <CoreLocation/CoreLocation.h>
 
-@protocol LocationDataDelegate
-@required
-//2 things can happen it can return the location or return an error (we handle the error within this class)
-- (void)gotLocation:(CLLocation *)location;
-- (void)gotError:(NSError *)error;
-@end
-
 //You are conforming to the CoreLocation Manager protocol
 @interface GetLocation : NSObject <CLLocationManagerDelegate>
 
@@ -25,9 +18,10 @@
 @property (nonatomic, assign) BOOL gotLocation;
 @property (nonatomic, assign) NSTimeInterval waitTime;
 
++ (GetLocation *)sharedInstance;
+
 //Accessible Functions
 - (void)getCurrentLocation;
-
 
 @end
 
