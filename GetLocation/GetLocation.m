@@ -66,7 +66,7 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
 	
 	if(!gotLocation) {
 		NSLog(@"%f", newLocation.horizontalAccuracy);
-		if (newLocation.horizontalAccuracy <  DESIRED_ACCURACY) {
+		if (newLocation.horizontalAccuracy <  DESIRED_ACCURACY && newLocation.horizontalAccuracy != -1) {
 			if ((newLocation.coordinate.longitude !=  0)&&(newLocation.coordinate.latitude !=  0)) {
                 if ((newLocation.coordinate.longitude !=  oldLocation.coordinate.longitude)&&(newLocation.coordinate.latitude !=  oldLocation.coordinate.latitude)) {
                     gotLocation = YES;
