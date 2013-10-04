@@ -9,11 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "GetLocation.h"
 
-@interface OneTimeLocationUpdateViewController : UIViewController <LocationDataDelegate> {
-	
-	GetLocation *getLoc;
-	UIButton *refreshButton;
-}
+@interface OneTimeLocationUpdateViewController : UIViewController
+
+@property (nonatomic, strong) GetLocation *getLoc;
+@property (nonatomic, strong) UIButton *refreshButton;
 
 @end
 

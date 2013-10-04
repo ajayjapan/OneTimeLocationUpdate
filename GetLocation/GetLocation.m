@@ -92,23 +92,6 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
     [[NSNotificationCenter defaultCenter] postNotificationName:ACGetLocationFailureNotification
                                                         object:error];
 
-//    UIAlertView *alert = nil;
-//    
-//    if (error.code ==  kCLErrorDenied) {
-//        
-//        NSString *appName = [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];
-//        
-//        NSString *errorMessage = [NSString stringWithFormat:@"We need access your location. Please go to Settings > Location Services and turn location services on for %@. Thanks.", appName];
-//        
-//        alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:errorMessage delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-//        
-//    } else {
-//        alert = [[UIAlertView alloc] initWithTitle:@"Oops" message:@"There was an error in determining you location. We need your location to proceed. Try refreshing." delegate:self cancelButtonTitle:nil otherButtonTitles:@"OK", nil];
-//    }
-//    
-//    [alert show];
-//    
-
 }
 
 
@@ -140,8 +123,6 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
 - (void)dealloc {
   
     self.locationManager.delegate = nil;
-    self.locationManager = nil;
-    self.timer = nil;
 
 }
 
