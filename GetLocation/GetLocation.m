@@ -13,6 +13,7 @@
 
 NSString * const ACGetLocationSuccessNotification = @"com.ajay.get.location.success";
 NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.failure";
+NSString * const ACGetLocationErrorDomain = @"ACGetLocationErrorDomain";
 
 @implementation GetLocation
 
@@ -42,23 +43,31 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
 -(void)pushBest
 {
     CLLocation *location = self.locationManager.location;
-    if (location) {
-        if(!gotLocation) {
-            
-            gotLocation = YES;
-            
-            NSLog(@"stopUpdatingLocation");
-            [self.locationManager stopUpdatingLocation];
-            
-            NSLog(@"gotLocation");
-            [[NSNotificationCenter defaultCenter] postNotificationName:ACGetLocationSuccessNotification
-                                                                object:location];
-            
-            NSLog(@"invalidate timer");
-            [timer invalidate];
-            self.timer = nil;
-        }
-    }	
+    
+    if (!location) {
+        NSDictionary *userInfo = [NSDictionary dictionaryWithObject:NSLocalizedStringFromTable(@"Couldn't get a location within the time limit", @"ACGetLocation", nil) forKey:NSLocalizedFailureReasonErrorKey];
+        NSError *error = [[NSError alloc] initWithDomain:ACGetLocationErrorDomain
+                                                    code:kCLErrorLocationUnknown
+                                                userInfo:userInfo];
+        [self locationManager:self.locationManager didFailWithError:error];
+        return;
+    }
+    
+    if(!gotLocation) {
+        
+        gotLocation = YES;
+        
+        NSLog(@"stopUpdatingLocation");
+        [self.locationManager stopUpdatingLocation];
+        
+        NSLog(@"gotLocation");
+        [[NSNotificationCenter defaultCenter] postNotificationName:ACGetLocationSuccessNotification
+                                                            object:location];
+        
+        NSLog(@"invalidate timer");
+        [timer invalidate];
+        self.timer = nil;
+    }
 }
 
 
@@ -107,9 +116,7 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
 }
 
 
-- (void)getCurrentLocation
-{
-  
+- (void)getCurrentLocation {
 	[self.locationManager startUpdatingLocation];
 	
 	[self startTimer];
@@ -117,7 +124,7 @@ NSString * const ACGetLocationFailureNotification = @"com.ajay.get.location.fail
 	gotLocation = NO;
 	
 	NSLog(@"searching for location..");
-  
+
 }
 
 - (void)dealloc {

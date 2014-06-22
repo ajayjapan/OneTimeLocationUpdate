@@ -6,7 +6,6 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
 //You must import the CoreLocation Framework
 #import <CoreLocation/CoreLocation.h>
 
