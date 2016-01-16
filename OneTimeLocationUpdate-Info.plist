@@ -26,5 +26,9 @@
 	<true/>
 	<key>NSMainNibFile</key>
 	<string>MainWindow</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to recommend you shows nearby.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>We need your location to recommend you shows nearby.</string>
 </dict>
 </plist>

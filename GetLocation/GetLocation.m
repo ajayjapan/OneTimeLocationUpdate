@@ -109,10 +109,21 @@ NSString * const ACGetLocationErrorDomain = @"ACGetLocationErrorDomain";
                                                repeats:NO];
 }
 
+- (void)locationManager:(CLLocationManager *)manager
+didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
+  if (status == kCLAuthorizationStatusNotDetermined) {
+    return;
+  }
+  [self getCurrentLocation];
+}
+
 
 - (void)getCurrentLocation {
-  if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
-    [self.locationManager requestWhenInUseAuthorization];
+  if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+    if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
+      [self.locationManager requestWhenInUseAuthorization];
+      return;
+    }
   }
 
   [self.locationManager startUpdatingLocation];
