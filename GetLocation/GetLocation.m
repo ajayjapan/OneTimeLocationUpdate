@@ -119,7 +119,10 @@ didChangeAuthorizationStatus:(CLAuthorizationStatus)status {
 
 
 - (void)getCurrentLocation {
-  if ([CLLocationManager authorizationStatus] == kCLAuthorizationStatusNotDetermined) {
+  CLAuthorizationStatus authorizationStatus = [CLLocationManager authorizationStatus];
+  if (authorizationStatus == kCLAuthorizationStatusDenied) {
+    return;
+  } else if (authorizationStatus == kCLAuthorizationStatusNotDetermined){
     if ([self.locationManager respondsToSelector:@selector(requestWhenInUseAuthorization)]) {
       [self.locationManager requestWhenInUseAuthorization];
       return;

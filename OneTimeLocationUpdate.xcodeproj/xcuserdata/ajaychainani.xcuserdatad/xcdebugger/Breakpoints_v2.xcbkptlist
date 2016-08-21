@@ -16,7 +16,7 @@
             startingLineNumber = "117"
             endingLineNumber = "117"
             landmarkName = "-locationManager:didChangeAuthorizationStatus:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
