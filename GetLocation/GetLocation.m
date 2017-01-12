@@ -17,7 +17,7 @@ NSString * const ACGetLocationErrorDomain = @"ACGetLocationErrorDomain";
 
 @implementation GetLocation
 
-@synthesize locationManager, timer, gotLocation, waitTime;
+@synthesize timer, gotLocation, waitTime;
 
 + (GetLocation *)sharedInstance {
   static GetLocation *_sharedInstance = nil;
@@ -31,12 +31,18 @@ NSString * const ACGetLocationErrorDomain = @"ACGetLocationErrorDomain";
 
 - (id)init{
   if (self = [super init]){
-    self.locationManager = [[CLLocationManager alloc] init];
-    self.locationManager.delegate = self;
-    self.locationManager.desiredAccuracy= kCLLocationAccuracyBest;
     self.waitTime = MAX_TIME_FOR_BEST_LOCATION;
   }
   return self;
+}
+
+- (CLLocationManager *)locationManager {
+  if (!_locationManager) {
+    _locationManager = [[CLLocationManager alloc] init];
+    _locationManager.delegate = self;
+    _locationManager.desiredAccuracy= kCLLocationAccuracyBest;
+  }
+  return _locationManager;
 }
 
 

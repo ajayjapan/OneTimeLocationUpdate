@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name                = "GetLocation"
-  s.version             = "0.0.3"
+  s.version             = "0.0.4"
   s.summary             = "Utility library for easily getting the location of a user"
   s.license             = { :type => 'MIT', :file => 'LICENSE' }
   s.homepage            = "https://ajayjapan.com"

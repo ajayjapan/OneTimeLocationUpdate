@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "GetLocation/GetLocation.m"
-            timestampString = "474617149.29995"
+            timestampString = "505912514.494973"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "-locationManager:didChangeAuthorizationStatus:"
             landmarkType = "7">
          </BreakpointContent>
